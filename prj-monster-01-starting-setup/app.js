@@ -58,6 +58,9 @@ const app = Vue.createApp({
       }
       this.attackPlayer();
     },
+    surrender() {
+      this.gameStatus = "lost";
+    },
   },
   watch: {
     monsterHealth: function (health) {
