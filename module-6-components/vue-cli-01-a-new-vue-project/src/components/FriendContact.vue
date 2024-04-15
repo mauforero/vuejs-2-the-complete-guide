@@ -33,6 +33,22 @@ const FriendContact = {
     email: { type: String, required: true },
     isFavorite: { type: Boolean, required: false, default: false },
   },
+  /**
+   * Custom events that this component will emit
+   */
+  // emits: ['toggle-favorite'],
+  emits: {
+    // The event depends on id being set to be emitted
+    "toggle-favorite": function (id) {
+      // Validate the value of id
+      if (id) {
+        return true;
+      } else {
+        console.warn("Id is missing");
+        return false;
+      }
+    },
+  },
   data() {
     return {
       showDetails: true,
@@ -44,6 +60,7 @@ const FriendContact = {
     },
     toggleFavorite() {
       this.isFavoriteFriend = !this.isFavoriteFriend;
+      // this.$emit("toggle-favorite");
       this.$emit("toggle-favorite", this.id);
     },
   },
