@@ -1,6 +1,9 @@
 <template>
   <li>
     <h2>{{ name }} {{ isFavorite ? "(Favorite)" : "" }}</h2>
+    <button @click="toggleFavorite">
+      {{ isFavorite ? "Unset" : "Set" }} Favorite
+    </button>
     <button @click="toggleDetails">
       {{ showDetails ? "Hide" : "Show" }} Details
     </button>
@@ -24,6 +27,7 @@ const FriendContact = {
    *  Symbol
    */
   props: {
+    id: { type: String, required: true },
     name: { type: String, required: true },
     phone: { type: String, required: true },
     email: { type: String, required: true },
@@ -37,6 +41,10 @@ const FriendContact = {
   methods: {
     toggleDetails() {
       this.showDetails = !this.showDetails;
+    },
+    toggleFavorite() {
+      this.isFavoriteFriend = !this.isFavoriteFriend;
+      this.$emit("toggle-favorite", this.id);
     },
   },
 };

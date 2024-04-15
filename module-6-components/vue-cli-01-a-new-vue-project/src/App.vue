@@ -4,15 +4,12 @@
     <friend-contact
       v-for="friend in friendList"
       :key="friend.id"
+      :id="friend.id"
       :name="friend.name"
       :phone="friend.phone"
       :email="friend.email"
-    ></friend-contact>
-    <friend-contact
-      name="Mikel Nielsen"
-      phone="0001 234 56789"
-      email="mnielsen@dark.com"
-      is-favorite="true"
+      :is-favorite="friend.isFavorite"
+      @toggle-favorite="favoriteWasToggled"
     ></friend-contact>
   </ul>
 </template>
@@ -27,21 +24,37 @@ const app = {
           name: "Jonas Kahnwald",
           phone: "01234 5678 991",
           email: "jonask@dark.com",
+          isFavorite: false,
         },
         {
-          id: "mnielsen",
+          id: "marthanielsen",
           name: "Martha Nielsen",
           phone: "01234 5678 991",
           email: "mnielsen@dark.com",
+          isFavorite: false,
         },
         {
           id: "btiedemann",
           name: "Bartosz Tiedemann",
           phone: "01234 5678 991",
           email: "btiedemann@dark.com",
+          isFavorite: false,
+        },
+        {
+          id: "mnielsen",
+          name: "Mikel Nielsen",
+          phone: "0001 234 56789",
+          email: "mnielsen@dark.com",
+          isFavorite: true,
         },
       ],
     };
+  },
+  methods: {
+    favoriteWasToggled(friendId) {
+      const friend = this.friendList.find((friend) => friend.id === friendId);
+      friend.isFavorite = !friend.isFavorite;
+    },
   },
 };
 
