@@ -4,11 +4,7 @@
     <friend-contact
       v-for="friend in friendList"
       :key="friend.id"
-      :id="friend.id"
-      :name="friend.name"
-      :phone="friend.phone"
-      :email="friend.email"
-      :is-favorite="friend.isFavorite"
+      v-bind="friend"
       @toggle-favorite="favoriteWasToggled"
     ></friend-contact>
   </ul>
