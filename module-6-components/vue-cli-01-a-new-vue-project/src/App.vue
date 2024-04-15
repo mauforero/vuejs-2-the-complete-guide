@@ -4,7 +4,15 @@
     <friend-contact
       v-for="friend in friendList"
       :key="friend.id"
-      :friend="friend"
+      :name="friend.name"
+      :phone="friend.phone"
+      :email="friend.email"
+    ></friend-contact>
+    <friend-contact
+      name="Mikel Nielsen"
+      phone="0001 234 56789"
+      email="mnielsen@dark.com"
+      is-favorite="true"
     ></friend-contact>
   </ul>
 </template>

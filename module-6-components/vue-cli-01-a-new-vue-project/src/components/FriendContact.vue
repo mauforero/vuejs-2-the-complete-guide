@@ -1,18 +1,34 @@
 <template>
   <li>
-    <h2>{{ friend.name }}</h2>
+    <h2>{{ name }} {{ isFavorite ? "(Favorite)" : "" }}</h2>
     <button @click="toggleDetails">
       {{ showDetails ? "Hide" : "Show" }} Details
     </button>
     <ul v-if="showDetails">
-      <li><strong>Phone:</strong>{{ friend.phone }}</li>
-      <li><strong>Email:</strong>{{ friend.email }}</li>
+      <li><strong>Phone:</strong>{{ phone }}</li>
+      <li><strong>Email:</strong>{{ email }}</li>
     </ul>
   </li>
 </template>
 <script>
 const FriendContact = {
-  props: { friend: Object },
+  /**
+   * the following value types (type property) are supported:
+   *  String
+   *  Number
+   *  Boolean
+   *  Array
+   *  Object
+   *  Date
+   *  Function
+   *  Symbol
+   */
+  props: {
+    name: { type: String, required: true },
+    phone: { type: String, required: true },
+    email: { type: String, required: true },
+    isFavorite: { type: Boolean, required: false, default: false },
+  },
   data() {
     return {
       showDetails: true,
