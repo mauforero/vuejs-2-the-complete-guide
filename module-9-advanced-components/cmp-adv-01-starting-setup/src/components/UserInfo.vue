@@ -1,11 +1,11 @@
 <template>
-  <section>
+  <base-section>
     <div>
       <h3>{{ fullName }}</h3>
       <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
     </div>
     <p>{{ infoText }}</p>
-  </section>
+  </base-section>
 </template>
 
 <script>

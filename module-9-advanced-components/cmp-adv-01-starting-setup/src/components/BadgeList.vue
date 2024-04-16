@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <base-section>
     <h2>Available Badges</h2>
     <ul>
       <li>
@@ -9,7 +9,7 @@
         <base-badge type="author" caption="AUTHOR"></base-badge>
       </li>
     </ul>
-  </section>
+  </base-section>
 </template>
 
 <style scoped>
