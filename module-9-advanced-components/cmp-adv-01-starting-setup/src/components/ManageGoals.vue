@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ErrorAlert from "./ErrorAlert.vue";
+import ErrorAlert from "./ui/ErrorAlert.vue";
 
 const ManageGoals = {
   components: {
