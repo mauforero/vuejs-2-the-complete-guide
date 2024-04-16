@@ -1,9 +1,9 @@
 <template>
   <base-section>
-    <div>
+    <template v-slot:header>
       <h3>{{ fullName }}</h3>
       <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
-    </div>
+    </template>
     <p>{{ infoText }}</p>
   </base-section>
 </template>
@@ -13,11 +13,3 @@ export default {
   props: ["fullName", "infoText", "role"],
 };
 </script>
-
-<style scoped>
-div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>
