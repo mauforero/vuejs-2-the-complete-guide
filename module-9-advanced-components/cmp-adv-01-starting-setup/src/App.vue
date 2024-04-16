@@ -9,7 +9,13 @@
       :role="activeUser.role"
     ></user-info>
     <base-section>
-      <p>This is another section</p>
+      <p>
+        <button @click="setActiveComponent('manage-goals')">
+          Manage Goals
+        </button>
+        <button @click="setActiveComponent('list-goals')">List Goals</button>
+      </p>
+      <component :is="activeComponent"></component>
     </base-section>
   </div>
 </template>
@@ -18,21 +24,31 @@
 import TheHeader from "./components/TheHeader.vue";
 import BadgeList from "./components/BadgeList.vue";
 import UserInfo from "./components/UserInfo.vue";
+import ListGoals from "./components/ListGoals.vue";
+import ManageGoals from "./components/ManageGoals.vue";
 
 export default {
   components: {
     TheHeader,
     BadgeList,
     UserInfo,
+    ListGoals,
+    ManageGoals,
   },
   data() {
     return {
+      activeComponent: "list-goals",
       activeUser: {
         name: "Maximilian Schwarzmüller",
         description: "Site owner and admin",
         role: "admin",
       },
     };
+  },
+  methods: {
+    setActiveComponent(component) {
+      this.activeComponent = component;
+    },
   },
 };
 </script>
