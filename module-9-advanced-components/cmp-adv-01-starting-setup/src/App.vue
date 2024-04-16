@@ -15,7 +15,10 @@
         </button>
         <button @click="setActiveComponent('list-goals')">List Goals</button>
       </p>
-      <component :is="activeComponent"></component>
+      <!-- keep-alive stops the dyamic components from being removed and destroyed -->
+      <keep-alive>
+        <component :is="activeComponent"></component>
+      </keep-alive>
     </base-section>
   </div>
 </template>
