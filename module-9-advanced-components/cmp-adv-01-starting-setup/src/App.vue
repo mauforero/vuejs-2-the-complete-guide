@@ -8,6 +8,9 @@
       :info-text="activeUser.description"
       :role="activeUser.role"
     ></user-info>
+    <base-section>
+      <p>This is another section</p>
+    </base-section>
   </div>
 </template>
 

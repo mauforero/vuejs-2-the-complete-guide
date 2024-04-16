@@ -1,6 +1,6 @@
 <template>
   <section>
-    <header>
+    <header v-if="$slots.header">
       <slot name="header"></slot>
     </header>
     <slot></slot>
