@@ -1,12 +1,15 @@
 <template>
+  <the-header title="Vue Resources"></the-header>
   <resource-list :resources="resources"></resource-list>
 </template>
 
 <script>
+import TheHeader from './components/layout/TheHeader.vue';
 import ResourceList from './components/resources/ResourceList.vue';
 
 export default {
   components: {
+    TheHeader,
     ResourceList,
   },
   data() {
