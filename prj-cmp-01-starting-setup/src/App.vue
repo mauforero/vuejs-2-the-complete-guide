@@ -1,19 +1,36 @@
 <template>
   <the-header title="Vue Resources"></the-header>
-  <resource-list :resources="resources"></resource-list>
+  <the-navigation></the-navigation>
+  <keep-alive>
+    <component :is="selectedTab"></component>
+  </keep-alive>
+  <!-- <resource-list :resources="resources"></resource-list> -->
 </template>
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue';
+import TheNavigation from './components/layout/TheNavigation.vue';
+import AddResource from './components/resources/AddResource.vue';
 import ResourceList from './components/resources/ResourceList.vue';
 
 export default {
   components: {
     TheHeader,
+    TheNavigation,
+    AddResource,
     ResourceList,
+  },
+  provide() {
+    return {
+      resources: this.resources,
+      getSelectedTab: () => this.selectedTab,
+      addResource: this.addResource,
+      setSelectedTab: this.setSelectedTab,
+    };
   },
   data() {
     return {
+      selectedTab: 'resource-list',
       resources: [
         {
           id: 'official-guide',
@@ -29,6 +46,21 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    setSelectedTab(selection) {
+      this.selectedTab = selection;
+    },
+    addResource(title, description, link) {
+      const newResource = {
+        id: crypto.randomUUID(),
+        title,
+        description,
+        link,
+      };
+      this.resources.unshift(newResource);
+      this.setSelectedTab('resource-list');
+    },
   },
 };
 </script>
