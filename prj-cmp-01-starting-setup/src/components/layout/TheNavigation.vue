@@ -12,7 +12,6 @@
 <script>
 export default {
   inject: ['getSelectedTab', 'setSelectedTab'],
-  data() {},
   computed: {
     listTabSelected: function () {
       return this.getSelectedTab() !== 'resource-list' ? 'flat' : '';

@@ -22,9 +22,10 @@ export default {
   },
   provide() {
     return {
-      resources: this.resources,
+      getResources: () => this.resources,
       getSelectedTab: () => this.selectedTab,
       addResource: this.addResource,
+      deleteResource: this.deleteResource,
       setSelectedTab: this.setSelectedTab,
     };
   },
@@ -60,6 +61,11 @@ export default {
       };
       this.resources.unshift(newResource);
       this.setSelectedTab('resource-list');
+    },
+    deleteResource(id) {
+      console.log({ id });
+      console.log(this.resources.filter((res) => res.id !== id));
+      this.resources = this.resources.filter((res) => res.id !== id);
     },
   },
 };

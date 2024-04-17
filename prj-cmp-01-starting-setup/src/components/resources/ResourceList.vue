@@ -1,7 +1,7 @@
 <template>
   <ul>
     <resource-item
-      v-for="resource in resources"
+      v-for="resource in getResources()"
       :key="resource.id"
       v-bind="resource"
     ></resource-item>
@@ -12,7 +12,7 @@
 import ResourceItem from './ResourceItem.vue';
 
 export default {
-  inject: ['resources'],
+  inject: ['getResources'],
   components: {
     ResourceItem,
   },
