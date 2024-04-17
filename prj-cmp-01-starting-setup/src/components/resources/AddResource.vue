@@ -23,6 +23,18 @@
       </div>
     </form>
   </base-card>
+  <teleport to="body">
+    <base-dialog
+      title="Invalid Data"
+      v-if="isInvalidData"
+      @close-dialog="this.isInvalidData = false"
+    >
+      <p>Please verify all fields and enter all the data.</p>
+      <template #actions>
+        <base-button @click="this.isInvalidData = false">OK</base-button>
+      </template>
+    </base-dialog>
+  </teleport>
 </template>
 
 <script>
@@ -33,14 +45,23 @@ export default {
       title: '',
       description: '',
       link: '',
+      isInvalidData: false,
     };
   },
   methods: {
     submitResource() {
-      this.addResource(this.title, this.description, this.link);
-      this.title = '';
-      this.description = '';
-      this.link = '';
+      if (
+        this.title.trim === '' ||
+        this.description.trim() === '' ||
+        this.link.trim() === ''
+      ) {
+        this.isInvalidData = true;
+      } else {
+        this.addResource(this.title, this.description, this.link);
+        this.title = '';
+        this.description = '';
+        this.link = '';
+      }
     },
   },
 };
