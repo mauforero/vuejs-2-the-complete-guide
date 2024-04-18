@@ -88,6 +88,9 @@
         <label for="how-other">Other</label>
       </div>
     </div>
+    <div class="form-control">
+      <rating-control v-model="rating"></rating-control>
+    </div>
     <div>
       <button>Save Data</button>
     </div>
@@ -95,9 +98,12 @@
 </template>
 
 <script>
-// import ref from 'vue';
+import RatingControl from './RatingControl.vue';
 
 export default {
+  components: {
+    RatingControl,
+  },
   data() {
     return {
       userName: '',
@@ -106,6 +112,7 @@ export default {
       referrer: '',
       userInterests: [],
       waysToLearn: '',
+      rating: null,
     };
   },
   computed: {
@@ -120,6 +127,9 @@ export default {
       console.log(this.referrer);
       console.log(this.userInterests);
       console.log(this.waysToLearn);
+      console.log(this.rating);
+      this.waysToLearn = '';
+      this.rating = null;
     },
     validateUserName() {
       if (this.userName === '') {
