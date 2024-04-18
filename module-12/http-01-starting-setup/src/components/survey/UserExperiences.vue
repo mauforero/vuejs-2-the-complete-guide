@@ -44,7 +44,7 @@ export default {
       this.error = null;
       try {
         const response = await fetch(
-          'https://vuejs-ca168-default-rtdb.firebaseio.com/surveys.'
+          'https://vuejs-ca168-default-rtdb.firebaseio.com/surveys.json'
         );
 
         const data = await response.json();
