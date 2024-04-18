@@ -10,7 +10,8 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/teams', component: TeamsList },
-    { path: '/teams/:teamId', component: TeamMembers },
+    // props: true will pass the param :teamId as a prop to the TeamMembers component
+    { path: '/teams/:teamId', component: TeamMembers, props: true },
     { path: '/users', component: UsersList },
   ],
   linkActiveClass: 'active',
