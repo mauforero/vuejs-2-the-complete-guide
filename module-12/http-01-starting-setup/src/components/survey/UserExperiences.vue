@@ -8,7 +8,7 @@
         >
       </div>
       <p v-if="isLoading">Loading surveys...</p>
-      <p v-else-if="!isLoading && !results.length">
+      <p v-else-if="!isLoading && !results.length && !error">
         No surveys found. Add some experience first.
       </p>
       <ul v-else-if="!isLoading && !!results">
@@ -19,6 +19,7 @@
           :rating="result.rating"
         ></survey-result>
       </ul>
+      <p v-if="error">{{ error }}</p>
     </base-card>
   </section>
 </template>
@@ -34,37 +35,44 @@ export default {
     return {
       results: [],
       isLoading: false,
+      error: null,
     };
   },
   methods: {
     async loadExperiences() {
       this.isLoading = true;
-      const response = await fetch(
-        'https://vuejs-ca168-default-rtdb.firebaseio.com/surveys.json'
-      );
-      const data = await response.json();
+      this.error = null;
+      try {
+        const response = await fetch(
+          'https://vuejs-ca168-default-rtdb.firebaseio.com/surveys.'
+        );
 
-      if (data) {
-        const results = [];
-        for (const id in data) {
-          results.push({
-            id,
-            name: data[id].name,
-            rating: data[id].rating,
-          });
+        const data = await response.json();
+
+        if (data) {
+          const results = [];
+          for (const id in data) {
+            results.push({
+              id,
+              name: data[id].name,
+              rating: data[id].rating,
+            });
+          }
+          this.results = results;
+          this.isLoading = false;
+        } else {
+          this.isLoading = false;
         }
-        this.results = results;
+      } catch (error) {
         this.isLoading = false;
-      } else {
-        this.isLoading = false;
+        this.error = 'Failed to fetch data. Please try again.';
       }
     },
   },
   mounted() {
-    this.isLoading = true;
-    setTimeout(() => {
-      this.loadExperiences();
-    }, 3 * 1000);
+    // setTimeout(() => {
+    this.loadExperiences();
+    // }, 3 * 1000);
   },
 };
 </script>
