@@ -1,17 +1,6 @@
 <template>
   <the-navigation></the-navigation>
   <main>
-    <div
-      style="
-        margin: auto;
-        max-width: 40rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <button @click="goToTeams">Go to teams</button>
-    </div>
     <router-view></router-view>
   </main>
 </template>
