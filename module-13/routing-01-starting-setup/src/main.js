@@ -28,6 +28,7 @@ const router = createRouter({
     // props: true will pass the param :teamId as a prop to the TeamMembers component
     {
       path: '/users',
+      meta: { needsAuth: true },
       components: { default: UsersList, footer: UsersFooter },
       beforeEnter: function (to, from, next) {
         console.log('users route beforeEnter');
@@ -56,6 +57,11 @@ router.beforeEach(function (to, from, next) {
   console.log('Global router beforeEach');
   to;
   from;
+
+  if (to.meta.needsAuth) {
+    const checkAuth = confirm('This route needs authentication');
+    next(checkAuth);
+  }
   // If empty confirm the navigation
   next();
 });
