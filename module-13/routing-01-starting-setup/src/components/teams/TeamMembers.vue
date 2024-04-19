@@ -39,6 +39,7 @@ export default {
   },
   created() {
     this.loadTeamMembers();
+    console.log(this.$route.query);
   },
   watch: {
     $route(newRoute) {
