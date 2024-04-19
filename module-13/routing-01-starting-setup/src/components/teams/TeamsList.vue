@@ -18,6 +18,12 @@ export default {
     TeamsItem,
   },
   inject: ['teams'],
+  beforeRouteEnter(to, from, next) {
+    console.log('TeamsList component beforeRouteEnter');
+    to;
+    from;
+    next();
+  },
 };
 </script>
 

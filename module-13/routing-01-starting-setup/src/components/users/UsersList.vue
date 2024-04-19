@@ -1,7 +1,13 @@
 <template>
   <ul>
-    <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
+    <user-item
+      v-for="user in users"
+      :key="user.id"
+      :name="user.fullName"
+      :role="user.role"
+    ></user-item>
   </ul>
+  <button @click="changesSaved = true">Save changes</button>
 </template>
 
 <script>
@@ -12,6 +18,22 @@ export default {
     UserItem,
   },
   inject: ['users'],
+  data() {
+    return {
+      changesSaved: false,
+    };
+  },
+  beforeRouteLeave(to, from, next) {
+    to;
+    from;
+    console.log('UsersList component beforeRouteLeave');
+    if (this.changesSaved) {
+      next();
+    } else {
+      const userWantsToLeave = confirm('Leave without saving changes');
+      next(userWantsToLeave);
+    }
+  },
 };
 </script>
 

@@ -9,7 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
-    <router-link to="/teams/t2">Go to team 2</router-link>
+    <router-link to="/teams/t2" id="go-teams-2">Go to team 2</router-link>
   </section>
 </template>
 
@@ -42,7 +42,9 @@ export default {
     console.log(this.$route.query);
   },
   watch: {
+    // We watch the route to reload teamMembers when #go-teams-2 is clicked
     $route(newRoute) {
+      // Prevent undefined error
       if (!newRoute.params.teamId) return;
       this.loadTeamMembers();
     },
