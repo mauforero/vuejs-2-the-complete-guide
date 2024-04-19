@@ -10,9 +10,20 @@ import NotFound from './components/layout/NotFound.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/teams', component: TeamsList, alias: '/' },
+    {
+      path: '/teams',
+      component: TeamsList,
+      alias: '/',
+      children: [
+        {
+          name: 'team-members',
+          path: ':teamId',
+          component: TeamMembers,
+          props: true,
+        },
+      ],
+    },
     // props: true will pass the param :teamId as a prop to the TeamMembers component
-    { path: '/teams/:teamId', component: TeamMembers, props: true },
     { path: '/users', component: UsersList },
     { path: '/:notFound(.*)', component: NotFound },
   ],
