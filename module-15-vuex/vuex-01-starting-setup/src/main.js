@@ -7,6 +7,7 @@ const store = createStore({
   state() {
     return {
       counter: 0,
+      isLoggedIn: false,
     };
   },
   // mutations should hold the logic to manage the state
@@ -19,6 +20,9 @@ const store = createStore({
     incrementCounterByPayload(state, payload) {
       state.counter = state.counter + payload.value;
     },
+    setUserAuth(state, payload) {
+      state.isLoggedIn = payload.auth;
+    },
   },
   // actions allow us to run async code to trigger mutations
   // actions should always be called from components
@@ -30,6 +34,21 @@ const store = createStore({
       setTimeout(() => {
         context.commit('incrementCounter');
       }, 2 * 1000);
+    },
+    loginUser(context) {
+      setTimeout(() => {
+        context.commit({
+          type: 'setUserAuth',
+          auth: true,
+        });
+      }, 500);
+    },
+    logoutUser(context) {
+      setTimeout(() => {
+        context.commit('setUserAuth', {
+          auth: false,
+        });
+      }, 1 * 1000);
     },
   },
   // getters are like computed properties for state
@@ -48,6 +67,14 @@ const store = createStore({
       }
 
       return finalCounter;
+    },
+    isUserLoggedIn(state) {
+      return state.isLoggedIn;
+    },
+    userStatusText(state, getters) {
+      return getters.isUserLoggedIn
+        ? 'User is authorized'
+        : 'User is not authorized';
     },
   },
 });
