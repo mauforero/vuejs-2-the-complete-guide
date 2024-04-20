@@ -24,7 +24,7 @@ const store = createStore({
   // actions should always be called from components
   // instead of calling mutations directly
   actions: {
-    // The context object contains all the methods to manage the state
+    // The context object contains all the store methods to manage the state
     // commit, dispatch, getters and the state itself
     incrementCounter(context) {
       setTimeout(() => {
