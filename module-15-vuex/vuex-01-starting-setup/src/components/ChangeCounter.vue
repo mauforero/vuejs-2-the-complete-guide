@@ -16,11 +16,11 @@ export default {
       // });
 
       // Call the incrementCounter action from the store
-      this.$store.dispatch('incrementCounter');
+      this.$store.dispatch('calculation/incrementCounter');
     },
-    ...mapActions(['incrementCounter']),
+    ...mapActions('calculation', ['incrementCounter']),
     // or
-    ...mapActions({
+    ...mapActions('calculation', {
       increment: 'incrementCounter',
     }),
   },

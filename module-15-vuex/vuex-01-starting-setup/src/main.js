@@ -5,6 +5,8 @@ import App from './App.vue';
 
 // Define the authentication module for the store
 const authModule = {
+  // state is local for a module hence isLoggedIn won't be directly
+  // accessible to counterModule
   state() {
     return {
       isLoggedIn: false,
@@ -49,11 +51,20 @@ const authModule = {
         ? 'User is authorized'
         : 'User is not authorized';
     },
+    /**
+     * In case I have to access the state from authModule I could
+     * pass the paremeters rootState and rootGetters to the getter
+     *
+     * accessOtherModuleState(state, getters, rootState, rootGetters) {
+     *
+     * }
+     */
   },
 };
 
 // Define the counter module for the store
 const counterModule = {
+  namespaced: true,
   state() {
     return {
       counter: 0,
@@ -97,8 +108,8 @@ const counterModule = {
 // initialize the store with both modules
 const store = createStore({
   modules: {
-    authModule,
-    counterModule,
+    auth: authModule,
+    calculation: counterModule,
   },
 });
 

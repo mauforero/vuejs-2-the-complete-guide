@@ -6,7 +6,7 @@
 export default {
   computed: {
     counter: function () {
-      return this.$store.getters.counterTimesThree;
+      return this.$store.getters['calculation/counterTimesThree'];
     },
   },
 };

@@ -12,9 +12,9 @@ export default {
     // counter: function () {
     //   return this.$store.getters.normalizedCounter;
     // },
-    ...mapGetters(['normalizedCounter']),
+    ...mapGetters('calculation', ['normalizedCounter']),
     // or
-    ...mapGetters({
+    ...mapGetters('calculation', {
       counter: 'normalizedCounter',
     }),
   },

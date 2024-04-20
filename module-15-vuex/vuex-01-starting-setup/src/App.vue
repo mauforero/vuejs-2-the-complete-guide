@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     addOne() {
-      this.$store.commit('incrementCounter');
+      this.$store.commit('calculation/incrementCounter');
     },
   },
 };
