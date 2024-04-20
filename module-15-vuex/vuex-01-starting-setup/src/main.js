@@ -3,23 +3,16 @@ import { createStore } from 'vuex';
 
 import App from './App.vue';
 
-const store = createStore({
+// Define the authentication module for the store
+const authModule = {
   state() {
     return {
-      counter: 0,
       isLoggedIn: false,
     };
   },
   // mutations should hold the logic to manage the state
   // mutations are ALWAYS SYNCHRONOUS!!!
   mutations: {
-    incrementCounter(state) {
-      state.counter = state.counter + 1;
-    },
-    // By introducing a "payload" we can change the state dynamically
-    incrementCounterByPayload(state, payload) {
-      state.counter = state.counter + payload.value;
-    },
     setUserAuth(state, payload) {
       state.isLoggedIn = payload.auth;
     },
@@ -30,11 +23,6 @@ const store = createStore({
   actions: {
     // The context object contains all the store methods to manage the state
     // commit, dispatch, getters and the state itself
-    incrementCounter(context) {
-      setTimeout(() => {
-        context.commit('incrementCounter');
-      }, 2 * 1000);
-    },
     loginUser(context) {
       setTimeout(() => {
         context.commit({
@@ -53,10 +41,45 @@ const store = createStore({
   },
   // getters are like computed properties for state
   getters: {
+    isUserLoggedIn(state) {
+      return state.isLoggedIn;
+    },
+    userStatusText(state, getters) {
+      return getters.isUserLoggedIn
+        ? 'User is authorized'
+        : 'User is not authorized';
+    },
+  },
+};
+
+// Define the counter module for the store
+const counterModule = {
+  state() {
+    return {
+      counter: 0,
+    };
+  },
+  mutations: {
+    incrementCounter(state) {
+      state.counter = state.counter + 1;
+    },
+    // By introducing a "payload" we can change the state dynamically
+    incrementCounterByPayload(state, payload) {
+      state.counter = state.counter + payload.value;
+    },
+  },
+  actions: {
+    incrementCounter(context) {
+      setTimeout(() => {
+        context.commit('incrementCounter');
+      }, 2 * 1000);
+    },
+  },
+  getters: {
     counterTimesThree(state) {
       return state.counter * 3;
     },
-    // getters allows to access other getters defined here
+    // the getters parameter allows to access other getters defined here
     normalizedCounter(state, getters) {
       const finalCounter = getters.counterTimesThree;
       if (finalCounter < 0) {
@@ -68,14 +91,14 @@ const store = createStore({
 
       return finalCounter;
     },
-    isUserLoggedIn(state) {
-      return state.isLoggedIn;
-    },
-    userStatusText(state, getters) {
-      return getters.isUserLoggedIn
-        ? 'User is authorized'
-        : 'User is not authorized';
-    },
+  },
+};
+
+// initialize the store with both modules
+const store = createStore({
+  modules: {
+    authModule,
+    counterModule,
   },
 });
 
