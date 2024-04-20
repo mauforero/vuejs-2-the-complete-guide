@@ -1,15 +1,17 @@
 <template>
-  <button @click="addOne">Add One</button>
+  <button @click="addOne">Increment Counter Async</button>
 </template>
 
 <script>
 export default {
   methods: {
     addOne() {
-      this.$store.commit({
-        type: 'incrementCounterByPayload',
-        value: 10,
-      });
+      // Execute the incrementCounter action from the store
+      // this.$store.commit({
+      //   type: 'incrementCounter',
+      //   value: 10,
+      // });
+      this.$store.dispatch('incrementCounter');
     },
   },
 };

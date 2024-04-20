@@ -10,6 +10,7 @@ const store = createStore({
     };
   },
   // mutations should hold the logic to manage the state
+  // mutations are ALWAYS SYNCHRONOUS!!!
   mutations: {
     incrementCounter(state) {
       state.counter = state.counter + 1;
@@ -19,7 +20,19 @@ const store = createStore({
       state.counter = state.counter + payload.value;
     },
   },
-  // Getters are like computed properties for state
+  // actions allow us to run async code to trigger mutations
+  // actions should always be called from components
+  // instead of calling mutations directly
+  actions: {
+    // The context object contains all the methods to manage the state
+    // commit, dispatch, getters and the state itself
+    incrementCounter(context) {
+      setTimeout(() => {
+        context.commit('incrementCounter');
+      }, 2 * 1000);
+    },
+  },
+  // getters are like computed properties for state
   getters: {
     counterTimesThree(state) {
       return state.counter * 3;
