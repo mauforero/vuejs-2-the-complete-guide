@@ -8,18 +8,24 @@
     <button @click="updateAge">Update Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model="enteredName" />
-      <input type="text" placeholder="Last Name" v-model="enteredLastName" />
+      <input type="text" placeholder="Last Name" ref="lastNameInput" />
+      <button @click="setEnteredLastName">Set Last Name</button>
       <p>Entered name: {{ enteredName }} {{ enteredLastName }}</p>
     </div>
     <div>Computed name: {{ computedName }}</div>
   </section>
+  <user-data :first-name="userMiddleName" :last-name="userLastName"></user-data>
 </template>
 
 <script>
 // ref creates reactive variables that can be used along the component
 import { computed, reactive, ref, watch } from 'vue';
+import UserData from './UserData.vue';
 
 export default {
+  components: {
+    UserData,
+  },
   setup() {
     // These variables can't be accessed by the component unless they are returned
     const middleName = ref('David');
@@ -68,9 +74,15 @@ export default {
     });
 
     // watch expects as parameters what to watch nad the function to execute
-    watch(enteredLastName, function (newVal, oldVal) {
-      console.log('enteredLastName has changed from', oldVal, 'to', newVal);
+    watch(enteredName, function (newVal, oldVal) {
+      console.log('enteredName has changed from', oldVal, 'to', newVal);
     });
+
+    // DOM element ref
+    const lastNameInput = ref(null);
+    function setEnteredLastName() {
+      enteredLastName.value = lastNameInput.value.value; //
+    }
 
     // We return an object that will be exposed to the component
     return {
@@ -82,6 +94,8 @@ export default {
       enteredName,
       enteredLastName,
       computedName,
+      lastNameInput,
+      setEnteredLastName,
     };
   },
   // data() {
