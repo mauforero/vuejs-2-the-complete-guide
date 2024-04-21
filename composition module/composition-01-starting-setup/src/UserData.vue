@@ -8,7 +8,16 @@
 </template>
 
 <script>
-import { computed, inject } from 'vue';
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+} from 'vue';
 
 export default {
   props: ['firstName', 'lastName'],
@@ -20,6 +29,30 @@ export default {
     context.emit('custom-event'); // replaces this.$emit
 
     const age = inject('userAge');
+
+    onBeforeMount(function () {
+      console.log('onBeforeMount triggered');
+    });
+
+    onMounted(function () {
+      console.log('onMounted triggered');
+    });
+
+    onBeforeUpdate(function () {
+      console.log('onBeforeUpdate triggered');
+    });
+
+    onUpdated(function () {
+      console.log('onUpdated triggered');
+    });
+
+    onBeforeUnmount(function () {
+      console.log('onBeforeUnmount triggered');
+    });
+
+    onUnmounted(function () {
+      console.log('onUnmounted triggered');
+    });
 
     return {
       userName,
