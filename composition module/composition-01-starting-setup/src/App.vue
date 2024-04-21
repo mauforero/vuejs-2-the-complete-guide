@@ -19,7 +19,7 @@
 
 <script>
 // ref creates reactive variables that can be used along the component
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, provide, reactive, ref, watch } from 'vue';
 import UserData from './UserData.vue';
 
 export default {
@@ -83,6 +83,9 @@ export default {
     function setEnteredLastName() {
       enteredLastName.value = lastNameInput.value.value; //
     }
+
+    // provide a value
+    provide('userAge', user.age);
 
     // We return an object that will be exposed to the component
     return {

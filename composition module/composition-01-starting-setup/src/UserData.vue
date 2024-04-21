@@ -2,13 +2,13 @@
   <section class="container">
     <div>
       <h3>{{ userName }}</h3>
-      <p></p>
+      <p>{{ age }}</p>
     </div>
   </section>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
 export default {
   props: ['firstName', 'lastName'],
@@ -19,8 +19,11 @@ export default {
 
     context.emit('custom-event'); // replaces this.$emit
 
+    const age = inject('userAge');
+
     return {
       userName,
+      age,
     };
   },
   // Options API works too
