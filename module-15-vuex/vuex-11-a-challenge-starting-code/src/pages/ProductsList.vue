@@ -2,7 +2,7 @@
   <section>
     <ul>
       <product-item
-        v-for="prod in getProductList"
+        v-for="prod in products"
         :key="prod.id"
         v-bind="prod"
       ></product-item>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+// import { toRaw } from 'vue';
 import ProductItem from '../components/products/ProductItem.vue';
 
 export default {
@@ -19,7 +19,9 @@ export default {
     ProductItem,
   },
   computed: {
-    ...mapGetters('product', ['getProductList']),
+    products: function () {
+      return this.$store.getters['product/getProductList'];
+    },
   },
 };
 </script>
